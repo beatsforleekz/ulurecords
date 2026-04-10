@@ -652,12 +652,23 @@ button{cursor:pointer}
   .event-flyer{width:64px;height:64px}
   .event-action{display:none}
 }
+@media(max-width:768px){
+  .nav-inner{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:1rem;
+  }
+  .nav-inner .nav-links{
+    width:100%;
+    flex-wrap:wrap;
+    gap:.9rem 1.2rem;
+  }
+}
 @media(max-width:640px){
   .releases-row{grid-template-columns:1fr 1fr;gap:1rem}
   .nav-home{gap:1.5rem;flex-wrap:wrap;justify-content:center}
   .home-logo-wrap{max-width:72vw}
   .footer-links{gap:1.2rem}
-  .nav-inner .nav-links{gap:1.2rem}
   .event-row{grid-template-columns:1fr}
   .event-flyer{display:none}
 }
@@ -731,7 +742,7 @@ button{cursor:pointer}
       Nestled in the heart of London, ULU Records thrives as a boutique label passionate about musical exploration. Drawing from the city's diverse influences and culture, we've created a sanctuary where creativity flourishes and collaboration drives innovation.
     </p>
     <p>
-      The name 'ULU' is Hawaiian and has a double meaning: while being a breadfruit tree, it also means to grow, growth, rising and inspire. Reflecting this ethos, our logo features a leaf from the ULU tree — a tribute to our mission of supporting artists and helping their music grow.
+      The name 'ULU' is Hawaiian and have a double meaning: while being a breadfruit tree, it also means to grow, growth, rising and inspire. Reflecting this ethos, our logo features a leaf from the ULU tree — a tribute to our mission of supporting artists and helping their music grow.
     </p>
     <p>
       At ULU, every beat tells a story. Our artists redefine sound, break boundaries, and shape the future of electronic music. We give them the freedom to experiment, evolve, and inspire.
@@ -759,7 +770,7 @@ button{cursor:pointer}
 <div id="page-music" class="page">
 
   <nav class="nav-inner">
-    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>Records</span></span>
+    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>ULU Records</span></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
       <li><a href="#" data-page="music" class="active">Music</a></li>
@@ -799,7 +810,7 @@ button{cursor:pointer}
            Link:   https://ulu.lnk.to/061
            Title:  What If You Fly
            Artist: Eli Fola x Sanvero
-           Year:   2026
+           Year:   2025
       ════════════════════════════════════════ -->
       <div class="release" id="release-02">
         <a class="release-link" href="https://ulu.lnk.to/061" target="_blank" rel="noopener">
@@ -808,7 +819,7 @@ button{cursor:pointer}
           </div>
           <span class="release-title">What If You Fly</span>
           <span class="release-artist">Eli Fola x Sanvero</span>
-          <span class="release-year">2026</span>
+          <span class="release-year">2025</span>
         </a>
       </div>
 
@@ -884,7 +895,7 @@ button{cursor:pointer}
 <div id="page-events" class="page">
 
   <nav class="nav-inner">
-    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>Records</span></span>
+    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>ULU Records</span></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
       <li><a href="#" data-page="music">Music</a></li>
@@ -1036,7 +1047,7 @@ button{cursor:pointer}
 <div id="page-contact" class="page">
 
   <nav class="nav-inner">
-    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>Records</span></span>
+    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>ULU Records</span></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
       <li><a href="#" data-page="music">Music</a></li>
