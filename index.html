@@ -80,7 +80,7 @@ button{cursor:pointer}
 .nav-inner .brand{
   display:inline-flex;
   align-items:center;
-  gap:.7rem;
+  gap:0;
   font-family:var(--f-head);
   font-size:1rem;
   font-weight:600;
@@ -90,11 +90,11 @@ button{cursor:pointer}
   cursor:pointer;
 }
 .nav-inner .brand img{
-  width:22px;
-  height:22px;
+  width:26px;
+  height:26px;
   object-fit:contain;
   display:block;
-
+  filter:invert(1);
   flex-shrink:0;
 }
 .nav-inner .nav-links{
@@ -117,9 +117,23 @@ button{cursor:pointer}
    HOME PAGE
 ═══════════════════════════════════════════════ */
 #page-home{
+  position:relative;
   align-items:center;
   justify-content:center;
   padding:clamp(3rem,8vh,6rem) var(--gutter) clamp(2rem,5vh,3.5rem);
+  overflow:hidden;
+}
+#page-home::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.48), rgba(0,0,0,.48)),
+    url('images/home-bg.jpg') center/cover no-repeat;
+}
+#page-home > *{
+  position:relative;
+  z-index:1;
 }
 
 /* Logo */
@@ -132,16 +146,19 @@ button{cursor:pointer}
   width:100%;
   height:auto;
   /* logo.png is black on white — invert renders white on black */
-  
+  filter:invert(1);
   display:block;
 }
 
 /* Home nav */
 .nav-home{
   display:flex;
-  gap:clamp(2rem,4.5vw,4.5rem);
+  width:100%;
+  max-width:clamp(180px,32vw,440px);
+  justify-content:space-between;
+  gap:1rem;
   list-style:none;
-  margin-bottom:clamp(3rem,6vh,5rem);
+  margin-bottom:0;
 }
 .nav-home a{
   font-family:var(--f-head);
@@ -259,7 +276,7 @@ button{cursor:pointer}
 }
 .about-body p{
   font-size:clamp(.88rem,1.15vw,1rem);
-  font-weight:300;
+  font-weight:400;
   line-height:1.82;
   letter-spacing:.015em;
   color:var(--light);
@@ -484,13 +501,10 @@ button{cursor:pointer}
 .contact-body{
   flex:1;
   padding:clamp(2.5rem,6vh,5rem) var(--gutter);
-  max-width:var(--max);
+  max-width:720px;
   margin:0 auto;
   width:100%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:clamp(3rem,7vw,9rem);
-  align-content:start;
+  display:block;
 }
 .contact-heading{
   font-family:var(--f-head);
@@ -502,10 +516,7 @@ button{cursor:pointer}
   margin-bottom:1.5rem;
 }
 .contact-left{
-  display:flex;
-  flex-direction:column;
-  gap:3rem;
-  justify-content:center;
+  display:none;
 }
 .contact-form{display:flex;flex-direction:column}
 .form-field{
@@ -553,7 +564,15 @@ button{cursor:pointer}
 .form-submit:hover{color:var(--white)}
 
 /* Right col */
-.contact-right{display:flex;flex-direction:column;gap:3rem}
+.contact-right{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  width:100%;
+  max-width:560px;
+  margin:0 auto;
+}
 .contact-links-list{list-style:none;display:flex;flex-direction:column}
 .contact-links-list li{border-bottom:1px solid var(--border)}
 .contact-links-list li a{
@@ -571,6 +590,29 @@ button{cursor:pointer}
 }
 .contact-links-list li a:hover{color:var(--grey)}
 .contact-links-list li a .arr{font-size:.7em;color:var(--mid)}
+.contact-links-list{
+  width:100%;
+}
+.contact-links-list li.platform a{
+  padding:1.1rem 0;
+}
+.contact-link-main{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.contact-platform-icon{
+  width:34px;
+  height:34px;
+  fill:currentColor;
+  flex-shrink:0;
+}
+.contact-platform-label{
+  display:block;
+  font-size:1rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
 
 /* Submit music highlight */
 .contact-links-list li.submit-music a{
@@ -634,10 +676,10 @@ button{cursor:pointer}
 .footer-links{display:flex;gap:2rem;list-style:none}
 .footer-links a{
   font-family:var(--f-head);
-  font-size:.6rem;
+  font-size:.9rem;
   letter-spacing:.2em;
   text-transform:uppercase;
-  color:var(--mid);
+  color:var(--white);
   transition:color .2s;
 }
 .footer-links a:hover{color:var(--white)}
@@ -647,7 +689,6 @@ button{cursor:pointer}
 ═══════════════════════════════════════════════ */
 @media(max-width:960px){
   .releases-row{grid-template-columns:repeat(2,1fr)}
-  .contact-body{grid-template-columns:1fr;gap:3rem}
   .event-row{grid-template-columns:64px 1fr}
   .event-flyer{width:64px;height:64px}
   .event-action{display:none}
@@ -693,24 +734,10 @@ button{cursor:pointer}
   <!-- Navigation — order: About · Music · Events · Contact -->
   <ul class="nav-home">
     <li><a href="#" data-page="about">About</a></li>
-    <li><a href="#" data-page="music">Music</a></li>
+    <li><a href="#" data-page="music">Listen</a></li>
     <li><a href="#" data-page="events">Events</a></li>
     <li><a href="#" data-page="contact">Contact</a></li>
   </ul>
-
-  <!-- Mailing list signup -->
-  <div class="signup-wrap">
-    <form class="signup-form" name="signup" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="signup"/>
-      <span class="signup-label">Stay in the loop</span>
-      <div class="signup-row">
-        <a href="https://stats.sender.net/forms/dR6vKR/view" target="_blank" rel="noopener" class="signup-btn signup-btn-home">
-          Click here to join mailing list
-        </a>
-      </div>
-    </form>
-    <p class="signup-success" hidden>Thanks for signing up.</p>
-  </div>
 
 </div>
 
@@ -726,10 +753,10 @@ button{cursor:pointer}
   </div>
 
   <nav class="nav-inner">
-    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>Records</span></span>
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about" class="active">About</a></li>
-      <li><a href="#" data-page="music">Music</a></li>
+      <li><a href="#" data-page="music">Listen</a></li>
       <li><a href="#" data-page="events">Events</a></li>
       <li><a href="#" data-page="contact">Contact</a></li>
     </ul>
@@ -755,9 +782,9 @@ button{cursor:pointer}
   <footer class="site-footer">
     <span class="footer-copy">© 2026 ULU Records</span>
     <ul class="footer-links">
-      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">Beatport</a></li>
-      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">Spotify</a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener">◎</a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">▶</a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">♫</a></li>
     </ul>
   </footer>
 
@@ -770,10 +797,10 @@ button{cursor:pointer}
 <div id="page-music" class="page">
 
   <nav class="nav-inner">
-    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>Records</span></span>
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
-      <li><a href="#" data-page="music" class="active">Music</a></li>
+      <li><a href="#" data-page="music" class="active">Listen</a></li>
       <li><a href="#" data-page="events">Events</a></li>
       <li><a href="#" data-page="contact">Contact</a></li>
     </ul>
@@ -880,9 +907,9 @@ button{cursor:pointer}
   <footer class="site-footer">
     <span class="footer-copy">© 2026 ULU Records</span>
     <ul class="footer-links">
-      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">Beatport</a></li>
-      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">Spotify</a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener">◎</a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">▶</a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">♫</a></li>
     </ul>
   </footer>
 
@@ -895,10 +922,10 @@ button{cursor:pointer}
 <div id="page-events" class="page">
 
   <nav class="nav-inner">
-    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>Records</span></span>
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
-      <li><a href="#" data-page="music">Music</a></li>
+      <li><a href="#" data-page="music">Listen</a></li>
       <li><a href="#" data-page="events" class="active">Events</a></li>
       <li><a href="#" data-page="contact">Contact</a></li>
     </ul>
@@ -1032,9 +1059,9 @@ button{cursor:pointer}
   <footer class="site-footer">
     <span class="footer-copy">© 2026 ULU Records</span>
     <ul class="footer-links">
-      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">Beatport</a></li>
-      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">Spotify</a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener">◎</a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">▶</a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">♫</a></li>
     </ul>
   </footer>
 
@@ -1047,103 +1074,65 @@ button{cursor:pointer}
 <div id="page-contact" class="page">
 
   <nav class="nav-inner">
-    <span class="brand" data-page="home"><img src="images/logo.png" alt=""/><span>Records</span></span>
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
-      <li><a href="#" data-page="music">Music</a></li>
+      <li><a href="#" data-page="music">Listen</a></li>
       <li><a href="#" data-page="events">Events</a></li>
       <li><a href="#" data-page="contact" class="active">Contact</a></li>
     </ul>
   </nav>
 
   <div class="contact-body">
-
-    <!-- LEFT: Signup -->
-    <div class="contact-left">
-
-      <!-- Mailing list -->
-      <div>
-        <div class="signup-row">
-          <a href="https://stats.sender.net/forms/dR6vKR/view" target="_blank" rel="noopener" class="signup-btn">
-            Click here to join mailing list
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RIGHT: Links + Socials -->
     <div class="contact-right">
-
       <div>
-        <span class="contact-heading">Find us</span>
         <ul class="contact-links-list">
-
           <li>
             <a href="mailto:info@pittbuhl.com">
-              Email <span class="arr">↗</span>
-            </a>
-          </li>
-
-          <!-- Submit your music -->
-          <li class="submit-music">
-            <a href="https://tstack.app/demos-for-ulu" target="_blank" rel="noopener">
-              Submit Your Music <span class="arr">↗</span>
+              Get In Touch <span class="arr">↗</span>
             </a>
           </li>
 
           <li>
+            <a href="https://stats.sender.net/forms/dR6vKR/view" target="_blank" rel="noopener">
+              Mailing List <span class="arr">↗</span>
+            </a>
+          </li>
+
+          <li class="platform">
             <a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">
-              Spotify <span class="arr">↗</span>
+              <span class="contact-link-main">
+                <svg class="contact-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                <span class="contact-platform-label">Spotify</span>
+              </span>
+              <span class="arr">↗</span>
             </a>
           </li>
-          <li>
+          <li class="platform">
             <a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">
-              Beatport <span class="arr">↗</span>
+              <span class="contact-link-main">
+                <svg class="contact-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5a7.5 7.5 0 110 15 7.5 7.5 0 010-15zm-1.5 3v9l7-4.5-7-4.5z"/></svg>
+                <span class="contact-platform-label">Beatport</span>
+              </span>
+              <span class="arr">↗</span>
             </a>
           </li>
-          <li>
+          <li class="platform">
             <a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener">
-              SoundCloud <span class="arr">↗</span>
+              <span class="contact-link-main">
+                <svg class="contact-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg>
+                <span class="contact-platform-label">SoundCloud</span>
+              </span>
+              <span class="arr">↗</span>
             </a>
           </li>
           <li>
             <a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener">
-              All Links <span class="arr">↗</span>
+              More Info <span class="arr">↗</span>
             </a>
           </li>
-
         </ul>
       </div>
-
-      <!-- Social icons — all inline SVG -->
-      <div>
-        <span class="socials-heading">Follow</span>
-        <div class="social-icons">
-
-          <!-- Instagram -->
-          <a class="social-icon" href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-
-          <!-- Spotify -->
-          <a class="social-icon" href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify">
-            <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          </a>
-
-          <!-- SoundCloud -->
-          <a class="social-icon" href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud">
-            <svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg>
-          </a>
-
-          <!-- Beatport -->
-          <a class="social-icon" href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport">
-            <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5a7.5 7.5 0 110 15 7.5 7.5 0 010-15zm-1.5 3v9l7-4.5-7-4.5z"/></svg>
-          </a>
-
-        </div>
-      </div>
-
     </div>
 
   </div>
@@ -1151,9 +1140,9 @@ button{cursor:pointer}
   <footer class="site-footer">
     <span class="footer-copy">© 2026 ULU Records</span>
     <ul class="footer-links">
-      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">Beatport</a></li>
-      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">Spotify</a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener">◎</a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">▶</a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">♫</a></li>
     </ul>
   </footer>
 
