@@ -117,9 +117,8 @@ button{cursor:pointer}
 ═══════════════════════════════════════════════ */
 #page-home{
   position:relative;
-  align-items:center;
   justify-content:center;
-  padding:clamp(3rem,8vh,6rem) var(--gutter) clamp(2rem,5vh,3.5rem);
+  padding:0;
   overflow:hidden;
 }
 #page-home::before{
@@ -136,88 +135,23 @@ button{cursor:pointer}
 }
 
 /* Logo */
+.home-main{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(3rem,8vh,6rem) var(--gutter) clamp(2rem,5vh,3.5rem);
+}
 .home-logo-wrap{
   width:100%;
   max-width:clamp(180px,32vw,440px);
-  margin-bottom:clamp(2.5rem,5.5vh,4.5rem);
+  margin:0 auto;
 }
 .home-logo-wrap img{
   width:100%;
   height:auto;
   display:block;
 }
-
-/* Home nav */
-.nav-home{
-  display:flex;
-  width:100%;
-  max-width:clamp(180px,32vw,440px);
-  justify-content:space-between;
-  gap:1rem;
-  list-style:none;
-  margin-bottom:0;
-}
-.nav-home a{
-  font-family:var(--f-head);
-  font-size:.98rem;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-  color:var(--white);
-  transition:color .2s;
-}
-.nav-home a:hover{color:var(--grey)}
-
-/* Signup */
-.signup-wrap{
-  width:100%;
-  max-width:380px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.8rem;
-}
-.signup-form{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.8rem;
-}
-.signup-label{
-  font-family:var(--f-head);
-  font-size:.7rem;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-  color:var(--grey);
-}
-.signup-success{
-  font-family:var(--f-body);
-  font-size:.82rem;
-  font-weight:300;
-  letter-spacing:.03em;
-  color:var(--grey);
-  text-align:center;
-}
-.signup-row{
-  display:inline-block;
-  width:auto;
-}
-.signup-btn{
-  display:inline-block;
-  font-family:var(--f-head);
-  font-size:clamp(1.3rem,2vw,1.5rem);
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--grey);
-  padding:.65rem 0;
-  line-height:1.1;
-  border-bottom:1px solid #444;
-  transition:color .2s;
-}
-.signup-btn-home{
-  font-size:clamp(1.02rem,1.5vw,1.18rem);
-}
-.signup-btn:hover{color:var(--white)}
 
 /* ═══════════════════════════════════════════════
    ABOUT PAGE
@@ -233,20 +167,20 @@ button{cursor:pointer}
   z-index:0;
   pointer-events:none;
 }
-/* FILE: images/about-bg.png — ULU leaf artwork */
+/* FILE: images/about-bg2.png — ULU leaf artwork */
 .about-bg img{
   width:100%;
   height:100%;
   object-fit:cover;
   object-position:center;
-  opacity:.16;
-  filter:grayscale(1);
+  opacity:.24;
+  filter:saturate(1.15) contrast(1.02);
 }
 .about-bg::after{
   content:'';
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.52);
+  background:rgba(0,0,0,.42);
 }
 .about-body{
   flex:1;
@@ -283,17 +217,26 @@ button{cursor:pointer}
 .about-body p:last-child{margin-bottom:0}
 
 /* ═══════════════════════════════════════════════
-   MUSIC PAGE
+   RELEASES PAGE
 ═══════════════════════════════════════════════ */
-#page-music{flex-direction:column}
-.music-body{
+#page-releases{flex-direction:column}
+.releases-body{
   flex:1;
   padding:clamp(2.5rem,6vh,5rem) var(--gutter);
   max-width:var(--max);
   margin:0 auto;
   width:100%;
 }
-.section-label{
+.embed-section{
+  border-top:1px solid var(--border);
+  padding-top:clamp(2rem,4.5vh,3.5rem);
+  margin-bottom:clamp(2rem,4.5vh,3.5rem);
+}
+.embed-section:first-child{
+  border-top:none;
+  padding-top:0;
+}
+.embed-label{
   font-family:var(--f-head);
   font-size:.78rem;
   font-weight:400;
@@ -302,65 +245,6 @@ button{cursor:pointer}
   color:var(--grey);
   margin-bottom:clamp(2rem,5vh,3.5rem);
   display:block;
-}
-
-/* 4-col releases row */
-.releases-row{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:clamp(1.2rem,2.5vw,2.5rem);
-  align-items:start;
-  margin-bottom:clamp(2.5rem,5vh,4rem);
-}
-.release{display:flex;flex-direction:column}
-.release-link{display:block;color:inherit}
-.release-link:hover .release-art img{opacity:.5}
-.release-art{
-  width:100%;
-  aspect-ratio:1/1;
-  overflow:hidden;
-  background:#111;
-  margin-bottom:1rem;
-}
-.release-art img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  display:block;
-  transition:opacity .4s ease;
-}
-.release-title{
-  font-family:var(--f-head);
-  font-size:clamp(.94rem,1.55vw,1.08rem);
-  font-weight:500;
-  letter-spacing:.07em;
-  text-transform:uppercase;
-  color:var(--white);
-  margin-bottom:.28rem;
-  line-height:1.25;
-  display:block;
-}
-.release-artist{
-  font-size:.84rem;
-  font-weight:300;
-  letter-spacing:.04em;
-  color:var(--grey);
-  margin-bottom:.2rem;
-  display:block;
-}
-.release-year{
-  font-family:var(--f-head);
-  font-size:.7rem;
-  letter-spacing:.18em;
-  color:var(--mid);
-  display:block;
-}
-
-/* Spotify */
-.spotify-wrap{
-  border-top:1px solid var(--border);
-  padding-top:clamp(2rem,4.5vh,3.5rem);
 }
 .spotify-label{
   font-family:var(--f-head);
@@ -372,6 +256,60 @@ button{cursor:pointer}
   display:block;
 }
 .spotify-wrap iframe{
+  display:block;
+  width:100%;
+  border:none;
+}
+.embed-placeholder{
+  min-height:180px;
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+  background:#090909;
+}
+.embed-placeholder span{
+  font-family:var(--f-head);
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--mid);
+  text-align:center;
+}
+
+/* ═══════════════════════════════════════════════
+   LISTEN PAGE
+═══════════════════════════════════════════════ */
+#page-listen{flex-direction:column}
+.listen-body{
+  flex:1;
+  padding:clamp(2.5rem,6vh,5rem) var(--gutter);
+  max-width:980px;
+  margin:0 auto;
+  width:100%;
+}
+.listen-title{
+  font-family:var(--f-head);
+  font-size:clamp(1.5rem,3vw,2.3rem);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--white);
+  margin-bottom:.75rem;
+}
+.listen-subtitle{
+  font-size:clamp(.96rem,1.3vw,1.05rem);
+  font-weight:300;
+  letter-spacing:.03em;
+  color:var(--grey);
+  margin-bottom:clamp(2rem,4vh,3rem);
+}
+.playlist-stack{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(1.5rem,3vh,2rem);
+}
+.playlist-embed iframe{
   display:block;
   width:100%;
   border:none;
@@ -498,160 +436,64 @@ button{cursor:pointer}
 .contact-body{
   flex:1;
   padding:clamp(2.5rem,6vh,5rem) var(--gutter);
-  max-width:720px;
+  max-width:var(--max);
   margin:0 auto;
   width:100%;
-  display:block;
-}
-.contact-heading{
-  font-family:var(--f-head);
-  font-size:.68rem;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:var(--grey);
-  display:block;
-  margin-bottom:1.5rem;
-}
-.contact-left{
-  display:none;
-}
-.contact-form{display:flex;flex-direction:column}
-.form-field{
-  display:flex;
-  flex-direction:column;
-  border-bottom:1px solid var(--border);
-  margin-bottom:1.5rem;
-  padding-bottom:.5rem;
-}
-.form-field label{
-  font-family:var(--f-head);
-  font-size:.62rem;
-  letter-spacing:.24em;
-  text-transform:uppercase;
-  color:var(--grey);
-  margin-bottom:.45rem;
-}
-.form-field input,
-.form-field textarea{
-  background:transparent;
-  outline:none;
-  font-size:.92rem;
-  font-weight:300;
-  letter-spacing:.03em;
-  color:var(--white);
-  width:100%;
-  padding:.2rem 0;
-  resize:none;
-}
-.form-field input::placeholder,
-.form-field textarea::placeholder{color:var(--mid)}
-.form-field textarea{min-height:80px}
-.form-submit{
-  font-family:var(--f-head);
-  font-size:.7rem;
-  letter-spacing:.26em;
-  text-transform:uppercase;
-  color:var(--grey);
-  border-bottom:1px solid var(--border);
-  padding:0 0 .65rem;
-  text-align:left;
-  transition:color .2s;
-  width:100%;
-}
-.form-submit:hover{color:var(--white)}
-
-/* Right col */
-.contact-right{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:0;
-  width:100%;
-  max-width:560px;
-  margin:0 auto;
-}
-.contact-links-list{list-style:none;display:flex;flex-direction:column}
-.contact-links-list li{border-bottom:1px solid var(--border)}
-.contact-links-list li a{
-  font-family:var(--f-head);
-  font-size:clamp(.88rem,1.4vw,1.05rem);
-  font-weight:300;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--white);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:1rem 0;
-  transition:color .2s;
-}
-.contact-links-list li a:hover{color:var(--grey)}
-.contact-links-list li a .arr{font-size:.7em;color:var(--mid)}
-.contact-links-list{
-  width:100%;
-}
-.contact-links-list li.platform a{
-  padding:1.1rem 0;
-}
-.contact-link-main{
-  display:flex;
-  align-items:center;
-  gap:1rem;
-}
-.contact-platform-icon{
-  width:34px;
-  height:34px;
-  fill:currentColor;
-  flex-shrink:0;
-}
-.contact-platform-icon-img{
-  width:34px;
-  height:34px;
-  object-fit:contain;
-  display:block;
-  flex-shrink:0;
-}
-.contact-platform-label{
-  display:block;
-  font-size:1rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-
-/* Submit music highlight */
-.contact-links-list li.submit-music a{
-  color:var(--white);
-}
-
-/* Socials */
-.socials-heading{
-  font-family:var(--f-head);
-  font-size:.68rem;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:var(--grey);
-  display:block;
-  margin-bottom:1.2rem;
-}
-.social-icons{
-  display:flex;
-  gap:1.6rem;
-  align-items:center;
-  flex-wrap:wrap;
-}
-.social-icon{
   display:flex;
   align-items:center;
   justify-content:center;
-  opacity:.7;
-  transition:opacity .2s;
 }
-.social-icon:hover{opacity:1}
-.social-icon svg{
-  width:21px;
-  height:21px;
-  fill:var(--white);
+.contact-banner{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  max-width:720px;
+  justify-content:center;
+  gap:clamp(2rem,4vh,2.5rem);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:clamp(2rem,5vh,3rem) 0;
+}
+.contact-item{
+  flex:1;
+  min-width:0;
+  text-align:center;
+}
+.contact-item-label{
+  font-family:var(--f-head);
+  font-size:.68rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--grey);
   display:block;
+  margin-bottom:1rem;
+}
+.contact-main-link,
+.contact-placeholder{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.9rem;
+  font-family:var(--f-head);
+  font-size:clamp(1.1rem,1.8vw,1.4rem);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--white);
+}
+.contact-main-link{
+  transition:color .2s;
+}
+.contact-main-link:hover{color:var(--grey)}
+.sender-form-field{
+  margin:0 auto;
+}
+.contact-icon{
+  width:18px;
+  height:18px;
+  stroke:var(--grey);
+  stroke-width:1.7;
+  fill:none;
+  flex-shrink:0;
 }
 
 /* ═══════════════════════════════════════════════
@@ -701,13 +543,17 @@ button{cursor:pointer}
   object-fit:contain;
   display:block;
 }
+.footer-links a.footer-robinm img{
+  width:28px;
+  height:18px;
+  filter:invert(1);
+}
 .footer-links a:hover{color:var(--white)}
 
 /* ═══════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════ */
 @media(max-width:960px){
-  .releases-row{grid-template-columns:repeat(2,1fr)}
   .event-row{grid-template-columns:64px 1fr}
   .event-flyer{width:64px;height:64px}
   .event-action{display:none}
@@ -725,18 +571,31 @@ button{cursor:pointer}
   }
 }
 @media(max-width:640px){
-  .releases-row{grid-template-columns:1fr 1fr;gap:1rem}
-  .nav-home{gap:1.5rem;flex-wrap:wrap;justify-content:center}
   .home-logo-wrap{max-width:72vw}
   .footer-links{gap:1.2rem}
   .event-row{grid-template-columns:1fr}
   .event-flyer{display:none}
 }
-@media(max-width:420px){
-  .releases-row{grid-template-columns:1fr}
-}
 
 </style>
+<script>
+  (function (s, e, n, d, er) {
+    s['Sender'] = er;
+    s[er] = s[er] || function () {
+      (s[er].q = s[er].q || []).push(arguments)
+    }, s[er].l = 1 * new Date();
+    s[er].on = function(event, callback) {
+      s[er].listeners = s[er].listeners || {};
+      (s[er].listeners[event] = s[er].listeners[event] || []).push(callback);
+    };
+    var a = e.createElement(n),
+        m = e.getElementsByTagName(n)[0];
+    a.async = 1;
+    a.src = d;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+  sender('aca8faa09e4387')
+</script>
 </head>
 <body>
 
@@ -745,18 +604,23 @@ button{cursor:pointer}
 ══════════════════════════════════════════════════ -->
 <div id="page-home" class="page active visible">
 
-  <!-- Logo — FILE: images/logo.png (black on white PNG, CSS invert → white on black) -->
-  <div class="home-logo-wrap">
-    <img src="images/logo.png" alt="ULU Records"/>
-  </div>
+  <nav class="nav-inner">
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
+    <ul class="nav-links">
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="releases">Releases</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
+      <li><a href="#" data-page="events">Events</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
 
-  <!-- Navigation — order: About · Music · Events · Contact -->
-  <ul class="nav-home">
-    <li><a href="#" data-page="about">About</a></li>
-    <li><a href="#" data-page="music">Listen</a></li>
-    <li><a href="#" data-page="events">Events</a></li>
-    <li><a href="#" data-page="contact">Contact</a></li>
-  </ul>
+  <div class="home-main">
+    <!-- Logo — FILE: images/logo.png -->
+    <div class="home-logo-wrap">
+      <img src="images/logo.png" alt="ULU Records"/>
+    </div>
+  </div>
 
 </div>
 
@@ -766,16 +630,17 @@ button{cursor:pointer}
 ══════════════════════════════════════════════════ -->
 <div id="page-about" class="page">
 
-  <!-- Leaf artwork background — FILE: images/about-bg.png -->
+  <!-- Leaf artwork background — FILE: images/about-bg2.png -->
   <div class="about-bg" aria-hidden="true">
-    <img src="images/about-bg.png" alt=""/>
+    <img src="images/about-bg2.png" alt=""/>
   </div>
 
   <nav class="nav-inner">
     <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about" class="active">About</a></li>
-      <li><a href="#" data-page="music">Listen</a></li>
+      <li><a href="#" data-page="releases">Releases</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
       <li><a href="#" data-page="events">Events</a></li>
       <li><a href="#" data-page="contact">Contact</a></li>
     </ul>
@@ -801,9 +666,11 @@ button{cursor:pointer}
   <footer class="site-footer">
     <span class="footer-copy">© 2026 ULU Records</span>
     <ul class="footer-links">
-      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
       <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
       <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
     </ul>
   </footer>
 
@@ -811,114 +678,51 @@ button{cursor:pointer}
 
 
 <!-- ══════════════════════════════════════════════════
-     MUSIC PAGE
+     RELEASES PAGE
 ══════════════════════════════════════════════════ -->
-<div id="page-music" class="page">
+<div id="page-releases" class="page">
 
   <nav class="nav-inner">
     <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
-      <li><a href="#" data-page="music" class="active">Listen</a></li>
+      <li><a href="#" data-page="releases" class="active">Releases</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
       <li><a href="#" data-page="events">Events</a></li>
       <li><a href="#" data-page="contact">Contact</a></li>
     </ul>
   </nav>
 
-  <div class="music-body">
-
-    <span class="section-label">Latest Releases</span>
-
-    <div class="releases-row">
-
-      <!-- ════════════════════════════════════════
-           RELEASE 01
-           Image:  images/release1.jpg  ← EldersCalling.jpg
-           Link:   https://ulu.lnk.to/062
-           Title:  Elders Calling
-           Artist: VERTIC
-           Year:   2026
-      ════════════════════════════════════════ -->
-      <div class="release" id="release-01">
-        <a class="release-link" href="https://ulu.lnk.to/062" target="_blank" rel="noopener">
-          <div class="release-art">
-            <img src="images/release1.jpg" alt="Elders Calling"/>
-          </div>
-          <span class="release-title">Elders Calling</span>
-          <span class="release-artist">VERTIC</span>
-          <span class="release-year">2026</span>
-        </a>
-      </div>
-
-      <!-- ════════════════════════════════════════
-           RELEASE 02
-           Image:  images/release2.jpg  ← WhatIfYouFly.jpg
-           Link:   https://ulu.lnk.to/061
-           Title:  What If You Fly
-           Artist: Eli Fola x Sanvero
-           Year:   2026
-      ════════════════════════════════════════ -->
-      <div class="release" id="release-02">
-        <a class="release-link" href="https://ulu.lnk.to/061" target="_blank" rel="noopener">
-          <div class="release-art">
-            <img src="images/release2.jpg" alt="What If You Fly"/>
-          </div>
-          <span class="release-title">What If You Fly</span>
-          <span class="release-artist">Eli Fola x Sanvero</span>
-          <span class="release-year">2026</span>
-        </a>
-      </div>
-
-      <!-- ════════════════════════════════════════
-           RELEASE 03
-           Image:  images/release3.jpg  ← LiquidLight.jpg
-           Link:   https://ulu.lnk.to/060
-           Title:  Liquid Light
-           Artist: David Mayer, Hyenah
-           Year:   2026
-      ════════════════════════════════════════ -->
-      <div class="release" id="release-03">
-        <a class="release-link" href="https://ulu.lnk.to/060" target="_blank" rel="noopener">
-          <div class="release-art">
-            <img src="images/release3.jpg" alt="Liquid Light"/>
-          </div>
-          <span class="release-title">Liquid Light</span>
-          <span class="release-artist">David Mayer, Hyenah</span>
-          <span class="release-year">2026</span>
-        </a>
-      </div>
-
-      <!-- ════════════════════════════════════════
-           RELEASE 04
-           Image:  images/release4.jpg  ← Dommage.jpg
-           Link:   https://ulu.lnk.to/059
-           Title:  Dommage
-           Artist: Coco, Ahoona
-           Year:   2026
-      ════════════════════════════════════════ -->
-      <div class="release" id="release-04">
-        <a class="release-link" href="https://ulu.lnk.to/059" target="_blank" rel="noopener">
-          <div class="release-art">
-            <img src="images/release4.jpg" alt="Dommage EP"/>
-          </div>
-          <span class="release-title">Dommage</span>
-          <span class="release-artist">Coco, Ahoona</span>
-          <span class="release-year">2026</span>
-        </a>
-      </div>
-
-    </div><!-- /releases-row -->
-
-    <!-- Spotify playlist embed -->
-    <div class="spotify-wrap">
+  <div class="releases-body">
+    <div class="embed-section">
       <span class="spotify-label">Listen on Spotify</span>
-      <iframe
-        src="https://open.spotify.com/embed/playlist/0qus11KxqOKpcbER58uSBS?utm_source=generator&theme=0"
-        height="352"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-        title="ULU Records — Spotify Playlist"
-      ></iframe>
+      <div class="spotify-wrap">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/0qus11KxqOKpcbER58uSBS?utm_source=generator&theme=0"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="ULU Records — Spotify Playlist"
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="embed-section">
+      <span class="embed-label">Beatport</span>
+      <!-- Embed player here -->
+      <div class="embed-placeholder"><span>Embed player here</span></div>
+    </div>
+
+    <div class="embed-section">
+      <span class="embed-label">Traxsource</span>
+      <!-- Embed player here -->
+      <div class="embed-placeholder"><span>Embed player here</span></div>
+    </div>
+
+    <div class="embed-section">
+      <span class="embed-label">Bandcamp</span>
+      <!-- Embed player here -->
+      <div class="embed-placeholder"><span>Embed player here</span></div>
     </div>
 
   </div>
@@ -926,9 +730,76 @@ button{cursor:pointer}
   <footer class="site-footer">
     <span class="footer-copy">© 2026 ULU Records</span>
     <ul class="footer-links">
-      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
       <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
       <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
+    </ul>
+  </footer>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     LISTEN PAGE
+══════════════════════════════════════════════════ -->
+<div id="page-listen" class="page">
+
+  <nav class="nav-inner">
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
+    <ul class="nav-links">
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="releases">Releases</a></li>
+      <li><a href="#" data-page="listen" class="active">Listen</a></li>
+      <li><a href="#" data-page="events">Events</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="listen-body">
+    <h2 class="listen-title">Listen</h2>
+    <p class="listen-subtitle">Playlists curated by ULU &amp; Founder Robin M</p>
+
+    <div class="playlist-stack">
+      <div class="playlist-embed">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/3eKgAOmuMhy9PkxkQfeCZi?utm_source=generator&theme=0"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="ULU Curated Playlist 1"
+        ></iframe>
+      </div>
+      <div class="playlist-embed">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/4GIZ1hzmdYSQ4hWJ89GUal?utm_source=generator&theme=0"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="ULU Curated Playlist 2"
+        ></iframe>
+      </div>
+      <div class="playlist-embed">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/0n2RINucLlF79Q6874X25a?utm_source=generator&theme=0"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="ULU Curated Playlist 3"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-copy">© 2026 ULU Records</span>
+    <ul class="footer-links">
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
     </ul>
   </footer>
 
@@ -944,7 +815,8 @@ button{cursor:pointer}
     <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
-      <li><a href="#" data-page="music">Listen</a></li>
+      <li><a href="#" data-page="releases">Releases</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
       <li><a href="#" data-page="events" class="active">Events</a></li>
       <li><a href="#" data-page="contact">Contact</a></li>
     </ul>
@@ -1070,9 +942,11 @@ button{cursor:pointer}
   <footer class="site-footer">
     <span class="footer-copy">© 2026 ULU Records</span>
     <ul class="footer-links">
-      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
       <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
       <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
     </ul>
   </footer>
 
@@ -1088,72 +962,40 @@ button{cursor:pointer}
     <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
     <ul class="nav-links">
       <li><a href="#" data-page="about">About</a></li>
-      <li><a href="#" data-page="music">Listen</a></li>
+      <li><a href="#" data-page="releases">Releases</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
       <li><a href="#" data-page="events">Events</a></li>
       <li><a href="#" data-page="contact" class="active">Contact</a></li>
     </ul>
   </nav>
 
   <div class="contact-body">
-    <div class="contact-right">
-      <div>
-        <ul class="contact-links-list">
-          <li>
-            <a href="mailto:info@pittbuhl.com">
-              Get In Touch <span class="arr">↗</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="https://stats.sender.net/forms/dR6vKR/view" target="_blank" rel="noopener">
-              Mailing List <span class="arr">↗</span>
-            </a>
-          </li>
-
-          <li class="platform">
-            <a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener">
-              <span class="contact-link-main">
-                <svg class="contact-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-                <span class="contact-platform-label">Spotify</span>
-              </span>
-              <span class="arr">↗</span>
-            </a>
-          </li>
-          <li class="platform">
-            <a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener">
-              <span class="contact-link-main">
-                <img class="contact-platform-icon-img" src="images/beatport.png" alt="Beatport"/>
-                <span class="contact-platform-label">Beatport</span>
-              </span>
-              <span class="arr">↗</span>
-            </a>
-          </li>
-          <li class="platform">
-            <a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener">
-              <span class="contact-link-main">
-                <svg class="contact-platform-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg>
-                <span class="contact-platform-label">SoundCloud</span>
-              </span>
-              <span class="arr">↗</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener">
-              More Info <span class="arr">↗</span>
-            </a>
-          </li>
-        </ul>
+    <div class="contact-banner">
+      <div class="contact-item">
+        <span class="contact-item-label">Get in Touch</span>
+        <a class="contact-main-link" href="mailto:info@ulurecords.com">
+          <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.5 6.5h17v11h-17z"/>
+            <path d="m4.5 7.5 7.5 6 7.5-6"/>
+          </svg>
+          <span>info@ulurecords.com</span>
+        </a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Mailing List</span>
+        <div class="sender-form-field" data-sender-form-id="bqxE2y"></div>
       </div>
     </div>
-
   </div>
 
   <footer class="site-footer">
     <span class="footer-copy">© 2026 ULU Records</span>
     <ul class="footer-links">
-      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
       <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
       <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
     </ul>
   </footer>
 
@@ -1168,7 +1010,8 @@ button{cursor:pointer}
   var pages = {
     home:    document.getElementById('page-home'),
     about:   document.getElementById('page-about'),
-    music:   document.getElementById('page-music'),
+    releases:document.getElementById('page-releases'),
+    listen:  document.getElementById('page-listen'),
     events:  document.getElementById('page-events'),
     contact: document.getElementById('page-contact')
   };
@@ -1198,7 +1041,7 @@ button{cursor:pointer}
 
     // Update active state on nav links within the current page
     var name = el.getAttribute('data-page');
-    document.querySelectorAll('.nav-links a, .nav-home a').forEach(function (a) {
+    document.querySelectorAll('.nav-links a').forEach(function (a) {
       a.classList.remove('active');
     });
     document.querySelectorAll('[data-page="' + name + '"]').forEach(function (a) {
