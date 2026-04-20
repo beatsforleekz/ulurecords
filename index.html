@@ -356,7 +356,7 @@ button{cursor:pointer}
 /* Event row with optional flyer image */
 .event-row{
   display:grid;
-  grid-template-columns:80px 1fr auto;
+  grid-template-columns:80px 1fr;
   gap:1rem 1.8rem;
   align-items:center;
   padding:1.4rem 0;
@@ -469,6 +469,9 @@ button{cursor:pointer}
   flex:1;
   min-width:0;
   text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 .contact-item-label{
   font-family:var(--f-head);
@@ -495,8 +498,22 @@ button{cursor:pointer}
   transition:color .2s;
 }
 .contact-main-link:hover{color:var(--grey)}
-.sender-form-field{
-  margin:0 auto;
+.contact-secondary-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--f-head);
+  font-size:clamp(.92rem,1.4vw,1.05rem);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--white);
+  border-bottom:1px solid var(--border);
+  padding-bottom:.4rem;
+  transition:color .2s, border-color .2s;
+}
+.contact-secondary-link:hover{
+  color:var(--grey);
+  border-color:#555;
 }
 .contact-icon{
   width:30px;
@@ -505,6 +522,29 @@ button{cursor:pointer}
   stroke-width:1.7;
   fill:none;
   flex-shrink:0;
+}
+.contact-address{
+  margin-top:.85rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.75rem;
+  text-align:center;
+}
+.contact-address-icon{
+  width:20px;
+  height:20px;
+  stroke:var(--grey);
+  stroke-width:1.7;
+  fill:none;
+}
+.contact-address-text{
+  max-width:520px;
+  font-size:.9rem;
+  font-weight:300;
+  line-height:1.7;
+  letter-spacing:.02em;
+  color:var(--grey);
 }
 
 /* ═══════════════════════════════════════════════
@@ -868,11 +908,10 @@ button{cursor:pointer}
       <span class="events-section-label">Past</span>
 
       <!-- ════════════════════════════════════
-           PAST EVENT 00
+           PAST EVENT 01
            Date:   12 April 2026
-           Title:  ULU Rising - Secret Session (Marginalia)
+           Title:  ULU Rising — Secret Session
            Image:  images/event120426.png
-           Link:   https://stats.sender.net/forms/dR6vKR/view
       ════════════════════════════════════ -->
       <div class="event-row" id="event-past-00">
         <div class="event-flyer">
@@ -880,62 +919,50 @@ button{cursor:pointer}
         </div>
         <div class="event-info">
           <span class="event-date">12 April 2026</span>
-          <span class="event-name">ULU Rising — Secret Session (Marginalia)</span>
+          <span class="event-name">ULU Rising — Secret Session</span>
           <span class="event-location">London · UK</span>
-        </div>
-        <div class="event-action">
-          <a class="event-link-btn" href="https://stats.sender.net/forms/dR6vKR/view" target="_blank" rel="noopener">Register →</a>
         </div>
       </div>
 
       <!-- ════════════════════════════════════
-           PAST EVENT 01
+           PAST EVENT 02
            Date:   6 December 2025
-           Title:  ULU Rising - Muze Presents
+           Title:  ULU Rising — Muze
            Image:  images/event061225.jpeg
-           Link:   https://ra.co/events/2297803
       ════════════════════════════════════ -->
       <div class="event-row" id="event-past-01">
         <div class="event-flyer">
-          <img src="images/event061225.jpeg" alt="ULU Rising - Muze Presents"/>
+          <img src="images/event061225.jpeg" alt="ULU Rising - Muze"/>
         </div>
         <div class="event-info">
           <span class="event-date">6 December 2025</span>
-          <span class="event-name">ULU Rising — Muze Presents</span>
-          <span class="event-location">Nairobi · KEN</span>
-        </div>
-        <div class="event-action">
-          <a class="event-link-btn" href="https://ra.co/events/2297803" target="_blank" rel="noopener">View →</a>
+          <span class="event-name">ULU Rising — Muze</span>
+          <span class="event-location">Nairobi · KE</span>
         </div>
       </div>
 
       <!-- ════════════════════════════════════
-           PAST EVENT 2
+           PAST EVENT 03
            Date:   23 October 2025
-           Title:  ULU Rising — ADE Edition (Warm)
+           Title:  ULU Rising — ADE Edition
            Image:  images/event231025.jpeg
-           Link:
       ════════════════════════════════════ -->
       <div class="event-row" id="event-past-02">
         <div class="event-flyer">
-          <img src="images/event231025.jpeg" alt="ULU Rising — ADE Edition (Warm)"/>
+          <img src="images/event231025.jpeg" alt="ULU Rising — ADE Edition"/>
         </div>
         <div class="event-info">
           <span class="event-date">23 October 2025</span>
-          <span class="event-name">ULU Rising — ADE Edition (Warm)</span>
+          <span class="event-name">ULU Rising — ADE Edition</span>
           <span class="event-location">Amsterdam · NL</span>
-        </div>
-        <div class="event-action">
-          <span class="event-status">—</span>
         </div>
       </div>
 
       <!-- ════════════════════════════════════
-           PAST EVENT 3
+           PAST EVENT 04
            Date:   18 October 2025
-           Title:  ULU Rising - DJ Merlon x Robin M
+           Title:  ULU Rising
            Image:  images/event181025.jpeg
-           Link:   https://ra.co/events/2255529
       ════════════════════════════════════ -->
       <div class="event-row" id="event-past-03">
         <div class="event-flyer">
@@ -943,32 +970,76 @@ button{cursor:pointer}
         </div>
         <div class="event-info">
           <span class="event-date">18 October 2025</span>
-          <span class="event-name">ULU Rising - DJ Merlon x Robin M</span>
+          <span class="event-name">ULU Rising</span>
           <span class="event-location">London · UK</span>
-        </div>
-        <div class="event-action">
-          <a class="event-link-btn" href="https://ra.co/events/2255529" target="_blank" rel="noopener">View →</a>
         </div>
       </div>
 
       <!-- ════════════════════════════════════
-           PAST EVENT 4
+           PAST EVENT 05
            Date:   23 May 2025
-           Title:  Ulu Rising x CIFF — Hosted by Soho House
+           Title:  ULU Rising — CIFF
            Image:  images/event230525.jpeg
-           Link:
       ════════════════════════════════════ -->
       <div class="event-row" id="event-past-04">
         <div class="event-flyer">
-          <img src="images/event230525.jpeg" alt="Ulu Rising x CIFF — Hosted by Soho House"/>
+          <img src="images/event230525.jpeg" alt="ULU Rising — CIFF"/>
         </div>
         <div class="event-info">
           <span class="event-date">23 May 2025</span>
-          <span class="event-name">Ulu Rising x CIFF — Hosted by Soho House</span>
+          <span class="event-name">ULU Rising — CIFF</span>
           <span class="event-location">Copenhagen · DK</span>
         </div>
-        <div class="event-action">
-          <span class="event-status">—</span>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 06
+           Date:   16 May 2025
+           Title:  ULU Rising
+           Image:  images/event160525.png
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-05">
+        <div class="event-flyer">
+          <img src="images/event160525.png" alt="ULU Rising"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">16 May 2025</span>
+          <span class="event-name">ULU Rising</span>
+          <span class="event-location">London · UK</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 07
+           Date:   31 January 2025
+           Title:  ULU Rising — Secret Session
+           Image:  images/event310125.png
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-06">
+        <div class="event-flyer">
+          <img src="images/event310125.png" alt="ULU Rising — Secret Session"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">31 January 2025</span>
+          <span class="event-name">ULU Rising — Secret Session</span>
+          <span class="event-location">London · UK</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 08
+           Date:   17 October 2024
+           Title:  ULU Rising — ADE Edition
+           Image:  images/event171024.png
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-07">
+        <div class="event-flyer">
+          <img src="images/event171024.png" alt="ULU Rising — ADE Edition"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">17 October 2024</span>
+          <span class="event-name">ULU Rising — ADE Edition</span>
+          <span class="event-location">Amsterdam · NL</span>
         </div>
       </div>
 
@@ -1022,7 +1093,14 @@ button{cursor:pointer}
       </div>
       <div class="contact-item">
         <span class="contact-item-label">Sign Up Below</span>
-        <div class="sender-form-field" data-sender-form-id="bqxE2y"></div>
+        <a class="contact-secondary-link" href="https://stats.sender.net/forms/eZ6YvJ/view" target="_blank" rel="noopener">Join Mailing List</a>
+        <div class="contact-address">
+          <svg class="contact-address-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s-5.5-5.64-5.5-10.25a5.5 5.5 0 1 1 11 0C17.5 15.36 12 21 12 21z"/>
+            <circle cx="12" cy="10.75" r="1.9"/>
+          </svg>
+          <p class="contact-address-text">Address: Ulu Records, 465C Hornsey Road, Unit 2,<br/>Office 10, London, N19 4DR, United Kingdom</p>
+        </div>
       </div>
     </div>
   </div>
