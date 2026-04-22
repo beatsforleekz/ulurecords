@@ -599,22 +599,247 @@ button{cursor:pointer}
   .event-action{display:none}
 }
 @media(max-width:768px){
+  :root{--gutter:clamp(1.1rem,5vw,1.5rem)}
   .nav-inner{
     flex-direction:column;
     align-items:flex-start;
-    gap:1rem;
+    gap:.85rem;
+    padding:1rem var(--gutter) .95rem;
   }
   .nav-inner .nav-links{
     width:100%;
     flex-wrap:wrap;
-    gap:.9rem 1.2rem;
+    gap:.75rem 1rem;
+  }
+  .nav-inner .nav-links a{
+    font-size:.82rem;
+  }
+  .home-main{
+    padding:clamp(2.5rem,7vh,4.5rem) var(--gutter) clamp(1.75rem,4vh,2.5rem);
+  }
+  .about-body,
+  .listen-body,
+  .events-body,
+  .contact-body{
+    padding:clamp(2rem,5vh,3rem) var(--gutter);
+  }
+  .about-body{
+    max-width:680px;
+  }
+  .about-heading{
+    margin-bottom:1.2rem;
+  }
+  .about-body p{
+    line-height:1.72;
+    margin-bottom:1rem;
+  }
+  .listen-title{
+    margin-bottom:.55rem;
+  }
+  .listen-subtitle{
+    margin-bottom:1.6rem;
+    max-width:34rem;
+  }
+  .embed-section{
+    margin-bottom:1.7rem;
+    padding-top:1.7rem;
+  }
+  .spotify-wrap iframe,
+  .playlist-embed iframe{
+    min-height:320px;
+  }
+  .playlist-stack{
+    gap:1.35rem;
+  }
+  .events-section{
+    margin-bottom:2.2rem;
+  }
+  .events-section-label{
+    padding-bottom:.85rem;
+  }
+  .event-row{
+    gap:.85rem 1rem;
+    padding:1.1rem 0;
+  }
+  .event-date{
+    margin-bottom:.22rem;
+  }
+  .event-name{
+    margin-bottom:.15rem;
+  }
+  .contact-banner{
+    gap:1.5rem;
+    padding:1.6rem 0 1.8rem;
+  }
+  .contact-item-label{
+    margin-bottom:.8rem;
+  }
+  .contact-address{
+    margin-top:.7rem;
+    gap:.6rem;
+  }
+  .contact-address-text{
+    max-width:30rem;
+    font-size:.86rem;
+    line-height:1.6;
+  }
+  .site-footer{
+    padding:1rem var(--gutter) 1.1rem;
+    gap:.85rem;
+  }
+  .footer-links{
+    gap:1rem;
+    flex-wrap:wrap;
   }
 }
 @media(max-width:640px){
-  .home-logo-wrap{max-width:72vw}
-  .footer-links{gap:1.2rem}
+  .home-logo-wrap{max-width:min(72vw,320px)}
+  .about-body,
+  .listen-body,
+  .events-body,
+  .contact-body{
+    padding:1.7rem var(--gutter) 2.2rem;
+  }
+  .listen-subtitle{
+    margin-bottom:1.35rem;
+  }
+  .embed-section{
+    margin-bottom:1.45rem;
+    padding-top:1.45rem;
+  }
+  .spotify-wrap iframe,
+  .playlist-embed iframe{
+    min-height:300px;
+  }
   .event-row{grid-template-columns:1fr}
   .event-flyer{display:none}
+  .event-info{
+    display:flex;
+    flex-direction:column;
+    gap:.12rem;
+  }
+  .site-footer{
+    justify-content:center;
+  }
+  .footer-copy{
+    width:100%;
+    text-align:center;
+  }
+  .footer-links{
+    justify-content:center;
+    gap:.95rem;
+  }
+}
+@media(max-width:430px){
+  :root{--gutter:1rem}
+  .nav-inner{
+    gap:.75rem;
+    padding:.9rem var(--gutter);
+  }
+  .nav-inner .brand img{
+    width:24px;
+    height:24px;
+  }
+  .nav-inner .nav-links{
+    gap:.65rem .9rem;
+  }
+  .nav-inner .nav-links a{
+    font-size:.78rem;
+    letter-spacing:.18em;
+  }
+  .home-main{
+    padding:2rem var(--gutter) 1.5rem;
+  }
+  .home-logo-wrap{
+    max-width:min(78vw,280px);
+  }
+  .about-body,
+  .listen-body,
+  .events-body,
+  .contact-body{
+    padding:1.45rem var(--gutter) 2rem;
+  }
+  .about-heading{
+    font-size:clamp(1.25rem,7vw,1.6rem);
+    margin-bottom:1rem;
+  }
+  .about-body p{
+    font-size:.9rem;
+    line-height:1.66;
+  }
+  .listen-title{
+    font-size:clamp(1.35rem,7vw,1.8rem);
+  }
+  .listen-subtitle{
+    font-size:.92rem;
+    line-height:1.5;
+    margin-bottom:1.2rem;
+  }
+  .playlist-item-title,
+  .spotify-label,
+  .events-section-label,
+  .contact-item-label{
+    font-size:.72rem;
+    letter-spacing:.22em;
+  }
+  .spotify-wrap iframe,
+  .playlist-embed iframe{
+    min-height:272px;
+  }
+  .playlist-stack{
+    gap:1.15rem;
+  }
+  .events-section{
+    margin-bottom:1.8rem;
+  }
+  .event-row{
+    gap:.65rem;
+    padding:.95rem 0;
+  }
+  .event-date{
+    font-size:.74rem;
+  }
+  .event-name{
+    font-size:1rem;
+    line-height:1.2;
+  }
+  .event-location{
+    font-size:.8rem;
+  }
+  .contact-banner{
+    gap:1.25rem;
+    padding:1.35rem 0 1.5rem;
+  }
+  .contact-icon{
+    width:32px;
+    height:32px;
+  }
+  .contact-main-link,
+  .contact-secondary-link{
+    font-size:.9rem;
+  }
+  .contact-address{
+    gap:.5rem;
+  }
+  .contact-address-text{
+    font-size:.82rem;
+    line-height:1.55;
+  }
+  .site-footer{
+    padding:.95rem var(--gutter) 1.05rem;
+  }
+  .footer-links{
+    gap:.8rem;
+  }
+  .footer-links a svg,
+  .footer-links a img{
+    width:17px;
+    height:17px;
+  }
+  .footer-links a.footer-robinm img{
+    width:24px;
+    height:16px;
+  }
 }
 
 </style>
