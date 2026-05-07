@@ -345,7 +345,7 @@ button{cursor:pointer}
 /* Event row with optional flyer image */
 .event-row{
   display:grid;
-  grid-template-columns:80px 1fr;
+  grid-template-columns:80px 1fr auto;
   gap:1rem 1.8rem;
   align-items:center;
   padding:1.4rem 0;
@@ -1058,6 +1058,35 @@ button{cursor:pointer}
   </nav>
 
   <div class="events-body">
+
+    <!-- ═══════════════════════════════════════
+         UPCOMING EVENTS
+    ═══════════════════════════════════════ -->
+    <div class="events-section">
+      <span class="events-section-label">Upcoming</span>
+
+      <!-- ════════════════════════════════════
+           UPCOMING EVENT 01
+           Date:   21 May 2026
+           Title:  ULU Rising - Secret Session
+           Image:  images/event210526.png
+           Link:   https://stats.sender.net/forms/aOYvAR/view?fbclid=PAQ0xDSwRpkFpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacA9FUxy5IJ42tv6Zvfff4nUxXE5WnB3c89C05k6qgctyoWNGEialmWF8r6bw_aem_kQ8WNYtoA6E8vZ-YZjvkQA
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-upcoming-01">
+        <div class="event-flyer">
+          <img src="images/event210526.png" alt="ULU Rising — Secret Session"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">21 May 2026</span>
+          <span class="event-name">ULU Rising — Secret Session</span>
+          <span class="event-location">London · UK</span>
+        </div>
+        <div class="event-action">
+          <a class="event-link-btn" href="https://stats.sender.net/forms/aOYvAR/view?fbclid=PAQ0xDSwRpkFpleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacA9FUxy5IJ42tv6Zvfff4nUxXE5WnB3c89C05k6qgctyoWNGEialmWF8r6bw_aem_kQ8WNYtoA6E8vZ-YZjvkQA" target="_blank" rel="noopener">Register →</a>
+        </div>
+      </div>
+
+    </div><!-- /upcoming -->
 
     <!-- ═══════════════════════════════════════
          PAST EVENTS
