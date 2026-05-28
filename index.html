@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ULU Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200;300;400;500;600&family=Barlow:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet"/>
+<style>
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;background:#000}
+body{
+  background:#000;
+  color:#fff;
+  font-family:'Barlow',sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+img{display:block}
+button,input,textarea{
+  font-family:'Barlow',sans-serif;
+  border:none;
+  background:none;
+  color:inherit;
+  padding:0;
+}
+button{cursor:pointer}
+
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root{
+  --white:  #ffffff;
+  --light:  #e8e8e8;
+  --grey:   #bbbbbb;
+  --mid:    #888888;
+  --dim:    #666666;
+  --border: #222222;
+  --f-head: 'Barlow Condensed', sans-serif;
+  --f-body: 'Barlow', sans-serif;
+  --gutter: clamp(1.5rem, 5vw, 4rem);
+  --max:    1340px;
+}
+
+/* ═══════════════════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════════════════ */
+.page{
+  display:none;
+  min-height:100vh;
+  flex-direction:column;
+  opacity:0;
+  transition:opacity 0.25s ease;
+}
+.page.active{display:flex}
+.page.visible{opacity:1}
+
+/* ═══════════════════════════════════════════════
+   INNER NAV
+═══════════════════════════════════════════════ */
+.nav-inner{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:clamp(1.2rem,3vh,1.8rem) var(--gutter);
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+  position:relative;
+  z-index:2;
+}
+.nav-inner .brand{
+  display:inline-flex;
+  align-items:center;
+  gap:0;
+  font-family:var(--f-head);
+  font-size:1rem;
+  font-weight:600;
+  letter-spacing:.38em;
+  text-transform:uppercase;
+  color:var(--white);
+  cursor:pointer;
+}
+.nav-inner .brand img{
+  width:26px;
+  height:26px;
+  object-fit:contain;
+  display:block;
+  flex-shrink:0;
+}
+.nav-inner .nav-links{
+  display:flex;
+  gap:clamp(1.2rem,2.8vw,2.8rem);
+  list-style:none;
+}
+.nav-inner .nav-links a{
+  font-family:var(--f-head);
+  font-size:.88rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--grey);
+  transition:color .2s;
+}
+.nav-inner .nav-links a:hover,
+.nav-inner .nav-links a.active{color:var(--white)}
+
+/* ═══════════════════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════════════════ */
+#page-home{
+  position:relative;
+  justify-content:center;
+  padding:0;
+  overflow:hidden;
+}
+#page-home::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.48), rgba(0,0,0,.48)),
+    url('images/home-bg.jpg') center/cover no-repeat;
+}
+#page-home > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Logo */
+.home-main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(3rem,8vh,6rem) var(--gutter) clamp(2rem,5vh,3.5rem);
+}
+.home-logo-wrap{
+  width:100%;
+  max-width:clamp(180px,32vw,440px);
+  margin:0 auto;
+}
+.home-logo-wrap img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* ═══════════════════════════════════════════════
+   ABOUT PAGE
+═══════════════════════════════════════════════ */
+#page-about{
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+}
+.about-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+/* FILE: images/about-bg2.png — ULU leaf artwork */
+.about-bg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  opacity:.24;
+  filter:saturate(1.15) contrast(1.02);
+}
+.about-bg::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.42);
+}
+.about-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(2rem,5vh,4rem) var(--gutter);
+  max-width:760px;
+  margin:0 auto;
+  width:100%;
+  position:relative;
+  z-index:1;
+}
+.about-heading{
+  font-family:'BRHendrix-Bold Regular', var(--f-head);
+  font-size:clamp(1.45rem,2.4vw,2.2rem);
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--white);
+  line-height:1.02;
+  margin-bottom:clamp(1.5rem,4vh,2.5rem);
+  text-align:center;
+}
+.about-body p{
+  font-size:clamp(.88rem,1.15vw,1rem);
+  font-weight:400;
+  line-height:1.82;
+  letter-spacing:.015em;
+  color:var(--light);
+  text-align:justify;
+  margin-bottom:1.25rem;
+}
+.about-body p:last-child{margin-bottom:0}
+
+.embed-section{
+  border-top:1px solid var(--border);
+  padding-top:clamp(2rem,4.5vh,3.5rem);
+  margin-bottom:clamp(2rem,4.5vh,3.5rem);
+}
+.embed-section:first-child{
+  border-top:none;
+  padding-top:0;
+}
+.embed-label{
+  font-family:var(--f-head);
+  font-size:.78rem;
+  font-weight:400;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--grey);
+  margin-bottom:clamp(2rem,5vh,3.5rem);
+  display:block;
+}
+.spotify-label{
+  font-family:var(--f-head);
+  font-size:.74rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--grey);
+  margin-bottom:1.2rem;
+  display:block;
+}
+.spotify-wrap iframe{
+  display:block;
+  width:100%;
+  border:none;
+}
+.embed-placeholder{
+  min-height:180px;
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+  background:#090909;
+}
+.embed-placeholder span{
+  font-family:var(--f-head);
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--mid);
+  text-align:center;
+}
+
+/* ═══════════════════════════════════════════════
+   LISTEN PAGE
+═══════════════════════════════════════════════ */
+#page-listen{flex-direction:column}
+.listen-body{
+  flex:1;
+  padding:clamp(2.5rem,6vh,5rem) var(--gutter);
+  max-width:980px;
+  margin:0 auto;
+  width:100%;
+}
+.listen-title{
+  font-family:var(--f-head);
+  font-size:clamp(1.5rem,3vw,2.3rem);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--white);
+  margin-bottom:.75rem;
+}
+.listen-subtitle{
+  font-size:clamp(.96rem,1.3vw,1.05rem);
+  font-weight:300;
+  letter-spacing:.03em;
+  color:var(--grey);
+  margin-bottom:clamp(2rem,4vh,3rem);
+}
+.playlist-stack{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(1.5rem,3vh,2rem);
+}
+.playlist-item-title{
+  font-family:var(--f-head);
+  font-size:.78rem;
+  font-weight:400;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--grey);
+  margin-bottom:.85rem;
+  display:block;
+}
+.playlist-embed iframe{
+  display:block;
+  width:100%;
+  border:none;
+}
+
+/* ═══════════════════════════════════════════════
+   EVENTS PAGE
+═══════════════════════════════════════════════ */
+#page-events{
+  flex-direction:column;
+}
+.events-body{
+  flex:1;
+  padding:clamp(2.5rem,6vh,5rem) var(--gutter);
+  max-width:var(--max);
+  margin:0 auto;
+  width:100%;
+}
+.events-section{margin-bottom:clamp(2.5rem,6vh,5rem)}
+.events-section:last-child{margin-bottom:0}
+.events-section-label{
+  font-family:var(--f-head);
+  font-size:.75rem;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--grey);
+  display:block;
+  border-bottom:1px solid var(--border);
+  padding-bottom:1rem;
+  margin-bottom:0;
+}
+
+/* Event row with optional flyer image */
+.event-row{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  gap:1rem 1.8rem;
+  align-items:center;
+  padding:1.4rem 0;
+  border-bottom:1px solid var(--border);
+}
+.event-row.no-image{
+  grid-template-columns:1fr auto;
+}
+
+/* Flyer thumbnail */
+.event-flyer{
+  width:80px;
+  height:80px;
+  overflow:hidden;
+  background:#111;
+  flex-shrink:0;
+}
+.event-flyer img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
+
+
+.event-date{
+  font-family:var(--f-head);
+  font-size:.8rem;
+  letter-spacing:.14em;
+  color:var(--grey);
+  text-transform:uppercase;
+  margin-bottom:.3rem;
+  display:block;
+}
+.event-name{
+  font-family:var(--f-head);
+  font-size:clamp(1rem,1.8vw,1.22rem);
+  font-weight:400;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  color:var(--white);
+  margin-bottom:.2rem;
+  display:block;
+}
+.event-location{
+  font-size:.84rem;
+  font-weight:300;
+  color:var(--grey);
+  letter-spacing:.04em;
+  display:block;
+}
+
+.event-action{
+  align-self:center;
+  flex-shrink:0;
+}
+.event-link-btn{
+  font-family:var(--f-head);
+  font-size:.68rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--grey);
+  border:1px solid var(--border);
+  padding:.45rem .9rem;
+  display:inline-block;
+  transition:color .2s, border-color .2s;
+  white-space:nowrap;
+}
+.event-link-btn:hover{
+  color:var(--white);
+  border-color:#555;
+}
+.event-status{
+  font-family:var(--f-head);
+  font-size:.68rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--dim);
+  white-space:nowrap;
+}
+.event-status.sold-out{text-decoration:line-through;color:#555}
+
+/* ═══════════════════════════════════════════════
+   CONTACT PAGE
+═══════════════════════════════════════════════ */
+#page-contact{flex-direction:column}
+.contact-body{
+  flex:1;
+  padding:clamp(2.5rem,6vh,5rem) var(--gutter);
+  max-width:var(--max);
+  margin:0 auto;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.contact-banner{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  max-width:720px;
+  justify-content:center;
+  gap:clamp(2rem,4vh,2.5rem);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:clamp(2rem,5vh,3rem) 0;
+}
+.contact-item{
+  flex:1;
+  min-width:0;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.contact-item-label{
+  font-family:var(--f-head);
+  font-size:.68rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--grey);
+  display:block;
+  margin-bottom:1rem;
+}
+.contact-main-link,
+.contact-placeholder{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.9rem;
+  font-family:var(--f-head);
+  font-size:clamp(.92rem,1.4vw,1.05rem);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--white);
+}
+.contact-main-link{
+  transition:color .2s;
+}
+.contact-main-link:hover{color:var(--grey)}
+.contact-secondary-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--f-head);
+  font-size:clamp(.92rem,1.4vw,1.05rem);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--white);
+  border-bottom:1px solid var(--border);
+  padding-bottom:.4rem;
+  transition:color .2s, border-color .2s;
+}
+.contact-secondary-link:hover{
+  color:var(--grey);
+  border-color:#555;
+}
+.contact-icon{
+  width:36px;
+  height:36px;
+  stroke:var(--grey);
+  stroke-width:1.7;
+  fill:none;
+  flex-shrink:0;
+}
+.contact-address{
+  margin-top:.85rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.75rem;
+  text-align:center;
+}
+.contact-address-icon{
+  width:20px;
+  height:20px;
+  stroke:var(--grey);
+  stroke-width:1.7;
+  fill:none;
+}
+.contact-address-text{
+  max-width:520px;
+  font-size:.9rem;
+  font-weight:300;
+  line-height:1.7;
+  letter-spacing:.02em;
+  color:var(--grey);
+}
+
+/* ═══════════════════════════════════════════════
+   SHARED FOOTER
+═══════════════════════════════════════════════ */
+.site-footer{
+  width:100%;
+  padding:clamp(1.2rem,2.5vh,1.8rem) var(--gutter);
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-shrink:0;
+  flex-wrap:wrap;
+  gap:1rem;
+  position:relative;
+  z-index:2;
+}
+.footer-copy{
+  font-family:var(--f-head);
+  font-size:.6rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--mid);
+}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--f-head);
+  font-size:.9rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--white);
+  transition:color .2s;
+}
+.footer-links a svg{
+  width:18px;
+  height:18px;
+  fill:currentColor;
+  display:block;
+}
+.footer-links a img{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+  display:block;
+}
+.footer-links a.footer-robinm img{
+  width:28px;
+  height:18px;
+  filter:invert(1);
+}
+.footer-links a:hover{color:var(--white)}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:960px){
+  .event-row{grid-template-columns:64px 1fr}
+  .event-flyer{width:64px;height:64px}
+  .event-action{display:none}
+}
+@media(max-width:768px){
+  :root{--gutter:clamp(1.1rem,5vw,1.5rem)}
+  .nav-inner{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.85rem;
+    padding:1rem var(--gutter) .95rem;
+  }
+  .nav-inner .nav-links{
+    width:100%;
+    flex-wrap:wrap;
+    gap:.75rem 1rem;
+  }
+  .nav-inner .nav-links a{
+    font-size:.82rem;
+  }
+  .home-main{
+    padding:clamp(2.5rem,7vh,4.5rem) var(--gutter) clamp(1.75rem,4vh,2.5rem);
+  }
+  .about-body,
+  .listen-body,
+  .events-body,
+  .contact-body{
+    padding:clamp(2rem,5vh,3rem) var(--gutter);
+  }
+  .about-body{
+    max-width:680px;
+  }
+  .about-heading{
+    margin-bottom:1.2rem;
+  }
+  .about-body p{
+    line-height:1.72;
+    margin-bottom:1rem;
+  }
+  .listen-title{
+    margin-bottom:.55rem;
+  }
+  .listen-subtitle{
+    margin-bottom:1.6rem;
+    max-width:34rem;
+  }
+  .embed-section{
+    margin-bottom:1.7rem;
+    padding-top:1.7rem;
+  }
+  .spotify-wrap iframe,
+  .playlist-embed iframe{
+    min-height:320px;
+  }
+  .playlist-stack{
+    gap:1.35rem;
+  }
+  .events-section{
+    margin-bottom:2.2rem;
+  }
+  .events-section-label{
+    padding-bottom:.85rem;
+  }
+  .event-row{
+    gap:.85rem 1rem;
+    padding:1.1rem 0;
+  }
+  .event-date{
+    margin-bottom:.22rem;
+  }
+  .event-name{
+    margin-bottom:.15rem;
+  }
+  .contact-banner{
+    gap:1.5rem;
+    padding:1.6rem 0 1.8rem;
+  }
+  .contact-item-label{
+    margin-bottom:.8rem;
+  }
+  .contact-address{
+    margin-top:.7rem;
+    gap:.6rem;
+  }
+  .contact-address-text{
+    max-width:30rem;
+    font-size:.86rem;
+    line-height:1.6;
+  }
+  .site-footer{
+    padding:1rem var(--gutter) 1.1rem;
+    gap:.85rem;
+  }
+  .footer-links{
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+}
+@media(max-width:640px){
+  .home-logo-wrap{max-width:min(72vw,320px)}
+  .about-body,
+  .listen-body,
+  .events-body,
+  .contact-body{
+    padding:1.7rem var(--gutter) 2.2rem;
+  }
+  .listen-subtitle{
+    margin-bottom:1.35rem;
+  }
+  .embed-section{
+    margin-bottom:1.45rem;
+    padding-top:1.45rem;
+  }
+  .spotify-wrap iframe,
+  .playlist-embed iframe{
+    min-height:300px;
+  }
+  .event-row{grid-template-columns:1fr}
+  .event-flyer{display:none}
+  .event-info{
+    display:flex;
+    flex-direction:column;
+    gap:.12rem;
+  }
+  .site-footer{
+    justify-content:center;
+  }
+  .footer-copy{
+    width:100%;
+    text-align:center;
+  }
+  .footer-links{
+    justify-content:center;
+    gap:.95rem;
+  }
+}
+@media(max-width:430px){
+  :root{--gutter:1rem}
+  .nav-inner{
+    gap:.75rem;
+    padding:.9rem var(--gutter);
+  }
+  .nav-inner .brand img{
+    width:24px;
+    height:24px;
+  }
+  .nav-inner .nav-links{
+    gap:.65rem .9rem;
+  }
+  .nav-inner .nav-links a{
+    font-size:.78rem;
+    letter-spacing:.18em;
+  }
+  .home-main{
+    padding:2rem var(--gutter) 1.5rem;
+  }
+  .home-logo-wrap{
+    max-width:min(78vw,280px);
+  }
+  .about-body,
+  .listen-body,
+  .events-body,
+  .contact-body{
+    padding:1.45rem var(--gutter) 2rem;
+  }
+  .about-heading{
+    font-size:clamp(1.25rem,7vw,1.6rem);
+    margin-bottom:1rem;
+  }
+  .about-body p{
+    font-size:.9rem;
+    line-height:1.66;
+  }
+  .listen-title{
+    font-size:clamp(1.35rem,7vw,1.8rem);
+  }
+  .listen-subtitle{
+    font-size:.92rem;
+    line-height:1.5;
+    margin-bottom:1.2rem;
+  }
+  .playlist-item-title,
+  .spotify-label,
+  .events-section-label,
+  .contact-item-label{
+    font-size:.72rem;
+    letter-spacing:.22em;
+  }
+  .spotify-wrap iframe,
+  .playlist-embed iframe{
+    min-height:272px;
+  }
+  .playlist-stack{
+    gap:1.15rem;
+  }
+  .events-section{
+    margin-bottom:1.8rem;
+  }
+  .event-row{
+    gap:.65rem;
+    padding:.95rem 0;
+  }
+  .event-date{
+    font-size:.74rem;
+  }
+  .event-name{
+    font-size:1rem;
+    line-height:1.2;
+  }
+  .event-location{
+    font-size:.8rem;
+  }
+  .contact-banner{
+    gap:1.25rem;
+    padding:1.35rem 0 1.5rem;
+  }
+  .contact-icon{
+    width:32px;
+    height:32px;
+  }
+  .contact-main-link,
+  .contact-secondary-link{
+    font-size:.9rem;
+  }
+  .contact-address{
+    gap:.5rem;
+  }
+  .contact-address-text{
+    font-size:.82rem;
+    line-height:1.55;
+  }
+  .site-footer{
+    padding:.95rem var(--gutter) 1.05rem;
+  }
+  .footer-links{
+    gap:.8rem;
+  }
+  .footer-links a svg,
+  .footer-links a img{
+    width:17px;
+    height:17px;
+  }
+  .footer-links a.footer-robinm img{
+    width:24px;
+    height:16px;
+  }
+}
+
+</style>
+<script>
+  (function (s, e, n, d, er) {
+    s['Sender'] = er;
+    s[er] = s[er] || function () {
+      (s[er].q = s[er].q || []).push(arguments)
+    }, s[er].l = 1 * new Date();
+    s[er].on = function(event, callback) {
+      s[er].listeners = s[er].listeners || {};
+      (s[er].listeners[event] = s[er].listeners[event] || []).push(callback);
+    };
+    var a = e.createElement(n),
+        m = e.getElementsByTagName(n)[0];
+    a.async = 1;
+    a.src = d;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://cdn.sender.net/accounts_resources/universal.js', 'sender');
+  sender('aca8faa09e4387')
+</script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════════════ -->
+<div id="page-home" class="page active visible">
+
+  <nav class="nav-inner">
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
+    <ul class="nav-links">
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
+      <li><a href="#" data-page="events">Events</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="home-main">
+    <!-- Logo — FILE: images/logo.png -->
+    <div class="home-logo-wrap">
+      <img src="images/logo.png" alt="ULU Records"/>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-copy">© 2026 ULU Records</span>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/ulurecords/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 8.5V6.75c0-.83.67-.75 1.5-.75H16V3h-2.25C10.85 3 10.5 5.25 10.5 6.5v2H8v3h2.5V21h3v-9.5H16l.5-3h-3z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
+      <li><a href="https://ulurecords.bandcamp.com/" target="_blank" rel="noopener" aria-label="Bandcamp"><svg viewBox="0 0 24 24"><path d="M7.15 18.5h9.78l4.92-13H12.07z"/></svg></a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
+    </ul>
+  </footer>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════════════════ -->
+<div id="page-about" class="page">
+
+  <!-- Leaf artwork background — FILE: images/about-bg2.png -->
+  <div class="about-bg" aria-hidden="true">
+    <img src="images/about-bg2.png" alt=""/>
+  </div>
+
+  <nav class="nav-inner">
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
+    <ul class="nav-links">
+      <li><a href="#" data-page="about" class="active">About</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
+      <li><a href="#" data-page="events">Events</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- About copy — edit text only, do not change structure -->
+  <div class="about-body">
+    <h1 class="about-heading">ROOTED IN HOUSE - BUILT WITH CULTURE</h1>
+    <p>
+      ULU is a London-based boutique label, founded by Robin Michelangelo aka Robin M and his manager Methe Buhl. The label began as a space for Robin to release his own music without rules, along with other selected but talented artists' with the care, vision and passion built from experience.
+    </p>
+    <p>
+      ULU is dedicated to release high quality underground house music with global influences. We dont chase trends and our releases blend melodic and deep textures with groove driven rhythms inspired by cultures from every corner of the globe, including of course our home town, London.
+    </p>
+    <p>
+      In a short space of time ULU have released records which are certified platinum, topped Beatport and Traxsource charts and received support from leading radio stations such as BBC Radio 1 and 1xtra - as well as by global taste making DJ's including; Black Coffee, Bedouin, Pete Tong, Diplo, Keinemusik, Ry X, Desiree, Shimza, Dennis Cruz among many more.
+    </p>
+    <p>
+      2024 saw the launch of the ULU event series, which to date has taken place in cities such as London, Amsterdam, Nairobi and Copenhagen. Providing a range of events from small intimate Secret Sessions to ticketed club events. At ULU events you will experience curated line ups by Robin; all talent from the label or our wider music family. You will meet an amazing music loving community who is open minded and welcoming.
+    </p>
+    <p>
+      Inspired by the Hawaiian word "ULU" meaning growth and increase while also being a super fruit, ULU is committed to quality music and artists while continuously pushing forward. Bold, brave and driven to create memorable moments, this is ULU.
+    </p>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-copy">© 2026 ULU Records</span>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/ulurecords/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 8.5V6.75c0-.83.67-.75 1.5-.75H16V3h-2.25C10.85 3 10.5 5.25 10.5 6.5v2H8v3h2.5V21h3v-9.5H16l.5-3h-3z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
+      <li><a href="https://ulurecords.bandcamp.com/" target="_blank" rel="noopener" aria-label="Bandcamp"><svg viewBox="0 0 24 24"><path d="M7.15 18.5h9.78l4.92-13H12.07z"/></svg></a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
+    </ul>
+  </footer>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     LISTEN PAGE
+══════════════════════════════════════════════════ -->
+<div id="page-listen" class="page">
+
+  <nav class="nav-inner">
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
+    <ul class="nav-links">
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="listen" class="active">Listen</a></li>
+      <li><a href="#" data-page="events">Events</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="listen-body">
+    <h2 class="listen-title">Listen</h2>
+    <div class="embed-section">
+      <span class="playlist-item-title">ULU Releases</span>
+      <div class="spotify-wrap">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/0qus11KxqOKpcbER58uSBS?utm_source=generator&theme=0"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="ULU Releases Playlist"
+        ></iframe>
+      </div>
+    </div>
+    <p class="listen-subtitle">Playlists curated by ULU &amp; Founder Robin M</p>
+
+    <div class="playlist-stack">
+      <div class="playlist-embed">
+        <span class="playlist-item-title">Robin M Selects</span>
+        <iframe
+          src="https://open.spotify.com/embed/playlist/0n2RINucLlF79Q6874X25a?utm_source=generator&theme=0"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="ULU Curated Playlist 1"
+        ></iframe>
+      </div>
+      <div class="playlist-embed">
+        <span class="playlist-item-title">Ulu Community</span>
+        <iframe
+          src="https://open.spotify.com/embed/playlist/4GIZ1hzmdYSQ4hWJ89GUal?utm_source=generator&theme=0"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="ULU Curated Playlist 2"
+        ></iframe>
+      </div>
+      <div class="playlist-embed">
+        <span class="playlist-item-title">After the club</span>
+        <iframe
+          src="https://open.spotify.com/embed/playlist/3eKgAOmuMhy9PkxkQfeCZi?utm_source=generator&theme=0"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="ULU Curated Playlist 3"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-copy">© 2026 ULU Records</span>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/ulurecords/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 8.5V6.75c0-.83.67-.75 1.5-.75H16V3h-2.25C10.85 3 10.5 5.25 10.5 6.5v2H8v3h2.5V21h3v-9.5H16l.5-3h-3z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
+      <li><a href="https://ulurecords.bandcamp.com/" target="_blank" rel="noopener" aria-label="Bandcamp"><svg viewBox="0 0 24 24"><path d="M7.15 18.5h9.78l4.92-13H12.07z"/></svg></a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
+    </ul>
+  </footer>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     EVENTS PAGE
+══════════════════════════════════════════════════ -->
+<div id="page-events" class="page">
+
+  <nav class="nav-inner">
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
+    <ul class="nav-links">
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
+      <li><a href="#" data-page="events" class="active">Events</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="events-body">
+
+    <!-- ═══════════════════════════════════════
+         PAST EVENTS
+    ═══════════════════════════════════════ -->
+    <div class="events-section">
+      <span class="events-section-label">Past</span>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 01
+           Date:   21 May 2026
+           Title:  ULU Rising — Secret Session
+           Image:  images/event210526.png
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-00a">
+        <div class="event-flyer">
+          <img src="images/event210526.png" alt="ULU Rising — Secret Session"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">21 May 2026</span>
+          <span class="event-name">ULU Rising — Secret Session</span>
+          <span class="event-location">London · UK</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 02
+           Date:   12 April 2026
+           Title:  ULU Rising — Secret Session
+           Image:  images/event120426.png
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-00">
+        <div class="event-flyer">
+          <img src="images/event120426.png" alt="ULU Rising - Secret Session"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">12 April 2026</span>
+          <span class="event-name">ULU Rising — Secret Session</span>
+          <span class="event-location">London · UK</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 03
+           Date:   6 December 2025
+           Title:  ULU Rising — Muze
+           Image:  images/event061225.jpeg
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-01">
+        <div class="event-flyer">
+          <img src="images/event061225.jpeg" alt="ULU Rising - Muze"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">6 December 2025</span>
+          <span class="event-name">ULU Rising — Muze</span>
+          <span class="event-location">Nairobi · KE</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 04
+           Date:   23 October 2025
+           Title:  ULU Rising — ADE Edition
+           Image:  images/event231025.jpeg
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-02">
+        <div class="event-flyer">
+          <img src="images/event231025.jpeg" alt="ULU Rising — ADE Edition"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">23 October 2025</span>
+          <span class="event-name">ULU Rising — ADE Edition</span>
+          <span class="event-location">Amsterdam · NL</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 05
+           Date:   18 October 2025
+           Title:  ULU Rising
+           Image:  images/event181025.jpeg
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-03">
+        <div class="event-flyer">
+          <img src="images/event181025.jpeg" alt="ULU Rising"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">18 October 2025</span>
+          <span class="event-name">ULU Rising</span>
+          <span class="event-location">London · UK</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 05
+           Date:   23 May 2025
+           Title:  ULU Rising — CIFF
+           Image:  images/event230525.jpeg
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-04">
+        <div class="event-flyer">
+          <img src="images/event230525.jpeg" alt="ULU Rising — CIFF"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">23 May 2025</span>
+          <span class="event-name">ULU Rising — CIFF</span>
+          <span class="event-location">Copenhagen · DK</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 06
+           Date:   16 May 2025
+           Title:  ULU Rising
+           Image:  images/event160525.png
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-05">
+        <div class="event-flyer">
+          <img src="images/event160525.png" alt="ULU Rising"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">16 May 2025</span>
+          <span class="event-name">ULU Rising</span>
+          <span class="event-location">London · UK</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 07
+           Date:   31 January 2025
+           Title:  ULU Rising — Secret Session
+           Image:  images/event310125.png
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-06">
+        <div class="event-flyer">
+          <img src="images/event310125.png" alt="ULU Rising — Secret Session"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">31 January 2025</span>
+          <span class="event-name">ULU Rising — Secret Session</span>
+          <span class="event-location">London · UK</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════
+           PAST EVENT 08
+           Date:   17 October 2024
+           Title:  ULU Rising — ADE Edition
+           Image:  images/event171024.png
+      ════════════════════════════════════ -->
+      <div class="event-row" id="event-past-07">
+        <div class="event-flyer">
+          <img src="images/event171024.png" alt="ULU Rising — ADE Edition"/>
+        </div>
+        <div class="event-info">
+          <span class="event-date">17 October 2024</span>
+          <span class="event-name">ULU Rising — ADE Edition</span>
+          <span class="event-location">Amsterdam · NL</span>
+        </div>
+      </div>
+
+    </div><!-- /past -->
+
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-copy">© 2026 ULU Records</span>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/ulurecords/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 8.5V6.75c0-.83.67-.75 1.5-.75H16V3h-2.25C10.85 3 10.5 5.25 10.5 6.5v2H8v3h2.5V21h3v-9.5H16l.5-3h-3z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
+      <li><a href="https://ulurecords.bandcamp.com/" target="_blank" rel="noopener" aria-label="Bandcamp"><svg viewBox="0 0 24 24"><path d="M7.15 18.5h9.78l4.92-13H12.07z"/></svg></a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
+    </ul>
+  </footer>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+
+  <nav class="nav-inner">
+    <span class="brand" data-page="home"><img src="images/logo.png" alt="ULU Records"/></span>
+    <ul class="nav-links">
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="listen">Listen</a></li>
+      <li><a href="#" data-page="events">Events</a></li>
+      <li><a href="#" data-page="contact" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="contact-body">
+    <div class="contact-banner">
+      <div class="contact-item">
+        <span class="contact-item-label">Get in Touch</span>
+        <a class="contact-main-link" href="mailto:info@ulurecords.com">
+          <svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.5 6.5h17v11h-17z"/>
+            <path d="m4.5 7.5 7.5 6 7.5-6"/>
+          </svg>
+        </a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Sign Up Below</span>
+        <a class="contact-secondary-link" href="https://stats.sender.net/forms/eZ6YvJ/view" target="_blank" rel="noopener">Join Mailing List</a>
+        <div class="contact-address">
+          <svg class="contact-address-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s-5.5-5.64-5.5-10.25a5.5 5.5 0 1 1 11 0C17.5 15.36 12 21 12 21z"/>
+            <circle cx="12" cy="10.75" r="1.9"/>
+          </svg>
+          <p class="contact-address-text">Address: Ulu Records, 465C Hornsey Road, Unit 2,<br/>Office 10, London, N19 4DR, United Kingdom</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-copy">© 2026 ULU Records</span>
+    <ul class="footer-links">
+      <li><a href="https://www.facebook.com/ulurecords/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 8.5V6.75c0-.83.67-.75 1.5-.75H16V3h-2.25C10.85 3 10.5 5.25 10.5 6.5v2H8v3h2.5V21h3v-9.5H16l.5-3h-3z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/ulurecords/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+      <li><a href="https://soundcloud.com/ulurecords" target="_blank" rel="noopener" aria-label="SoundCloud"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c.95-.02 1.68-.77 1.68-1.74 0-.96-.74-1.74-1.68-1.74-.05 0-.1 0-.14.01.04-.18.06-.37.06-.57 0-1.6-1.26-2.9-2.82-2.9-.5 0-.97.14-1.37.38C15.6 9.42 14.49 8.5 13.17 8.5c-.61 0-1.17.2-1.61.37zm-1.1.35c-.17-.04-.34-.06-.51-.06-1.67 0-3.02 1.38-3.02 3.08 0 .09.01.18.01.27C6.35 12.71 6 13.3 6 13.98c0 1.12.88 2.02 1.97 2.02h2.49V9.22z"/></svg></a></li>
+      <li><a href="https://ulurecords.bandcamp.com/" target="_blank" rel="noopener" aria-label="Bandcamp"><svg viewBox="0 0 24 24"><path d="M7.15 18.5h9.78l4.92-13H12.07z"/></svg></a></li>
+      <li><a href="https://www.beatport.com/label/ulu-records/97062" target="_blank" rel="noopener" aria-label="Beatport"><img src="images/beatport.png" alt="Beatport"/></a></li>
+      <li><a href="https://open.spotify.com/playlist/0qus11KxqOKpcbER58uSBS" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a></li>
+      <li><a href="https://linktr.ee/ulurecords" target="_blank" rel="noopener" aria-label="Linktree"><img src="images/linktree.webp" alt="Linktree"/></a></li>
+      <li><a class="footer-robinm" href="https://robinm.co.uk/" target="_blank" rel="noopener" aria-label="Robin M"><img src="images/RM.PNG" alt="Robin M"/></a></li>
+    </ul>
+  </footer>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     PAGE SWITCHING SCRIPT
+══════════════════════════════════════════════════ -->
+<script>
+(function () {
+  var pages = {
+    home:    document.getElementById('page-home'),
+    about:   document.getElementById('page-about'),
+    listen:  document.getElementById('page-listen'),
+    events:  document.getElementById('page-events'),
+    contact: document.getElementById('page-contact')
+  };
+  var current = 'home';
+
+  function getPageFromHash() {
+    var name = window.location.hash.replace('#', '');
+    return pages[name] ? name : 'home';
+  }
+
+  function setActiveNav(name) {
+    document.querySelectorAll('.nav-links a').forEach(function (a) {
+      a.classList.remove('active');
+    });
+    document.querySelectorAll('[data-page="' + name + '"]').forEach(function (a) {
+      if (a.tagName === 'A') a.classList.add('active');
+    });
+  }
+
+  function showPageImmediately(name) {
+    Object.keys(pages).forEach(function (key) {
+      pages[key].classList.remove('active', 'visible');
+    });
+    pages[name].classList.add('active', 'visible');
+    current = name;
+    setActiveNav(name);
+  }
+
+  function goTo(name) {
+    if (!pages[name] || name === current) return;
+    var leaving = pages[current];
+    leaving.classList.remove('visible');
+    setTimeout(function () {
+      leaving.classList.remove('active');
+      var entering = pages[name];
+      entering.classList.add('active');
+      entering.getBoundingClientRect(); // force reflow
+      entering.classList.add('visible');
+      current = name;
+      window.location.hash = name === 'home' ? '' : name;
+      setActiveNav(name);
+      window.scrollTo(0, 0);
+    }, 220);
+  }
+
+  showPageImmediately(getPageFromHash());
+
+  // Wire up all data-page links
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-page]');
+    if (!el) return;
+    e.preventDefault();
+    goTo(el.getAttribute('data-page'));
+  });
+
+  window.addEventListener('hashchange', function () {
+    var name = getPageFromHash();
+    if (name !== current) showPageImmediately(name);
+  });
+
+})();
+</script>
+</body>
+</html>
