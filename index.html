@@ -1310,6 +1310,29 @@ button{cursor:pointer}
   };
   var current = 'home';
 
+  function getPageFromHash() {
+    var name = window.location.hash.replace('#', '');
+    return pages[name] ? name : 'home';
+  }
+
+  function setActiveNav(name) {
+    document.querySelectorAll('.nav-links a').forEach(function (a) {
+      a.classList.remove('active');
+    });
+    document.querySelectorAll('[data-page="' + name + '"]').forEach(function (a) {
+      if (a.tagName === 'A') a.classList.add('active');
+    });
+  }
+
+  function showPageImmediately(name) {
+    Object.keys(pages).forEach(function (key) {
+      pages[key].classList.remove('active', 'visible');
+    });
+    pages[name].classList.add('active', 'visible');
+    current = name;
+    setActiveNav(name);
+  }
+
   function goTo(name) {
     if (!pages[name] || name === current) return;
     var leaving = pages[current];
@@ -1321,9 +1344,13 @@ button{cursor:pointer}
       entering.getBoundingClientRect(); // force reflow
       entering.classList.add('visible');
       current = name;
+      window.location.hash = name === 'home' ? '' : name;
+      setActiveNav(name);
       window.scrollTo(0, 0);
     }, 220);
   }
+
+  showPageImmediately(getPageFromHash());
 
   // Wire up all data-page links
   document.addEventListener('click', function (e) {
@@ -1331,15 +1358,11 @@ button{cursor:pointer}
     if (!el) return;
     e.preventDefault();
     goTo(el.getAttribute('data-page'));
+  });
 
-    // Update active state on nav links within the current page
-    var name = el.getAttribute('data-page');
-    document.querySelectorAll('.nav-links a').forEach(function (a) {
-      a.classList.remove('active');
-    });
-    document.querySelectorAll('[data-page="' + name + '"]').forEach(function (a) {
-      if (a.tagName === 'A') a.classList.add('active');
-    });
+  window.addEventListener('hashchange', function () {
+    var name = getPageFromHash();
+    if (name !== current) showPageImmediately(name);
   });
 
 })();
